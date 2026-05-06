@@ -75,6 +75,8 @@ def get_wx():
 		daily_apparent_temperature_max = daily.Variables(6).ValuesAsNumpy()
 		daily_apparent_temperature_min = daily.Variables(7).ValuesAsNumpy()
 		daily_precipitation_probability_max = daily.Variables(8).ValuesAsNumpy()
+		daily_wind_speed_10m_max = daily.Variables(9).ValuesAsNumpy()
+		daily_wind_gusts_10m_max = daily.Variables(10).ValuesAsNumpy()
 
 		
 		dates = pd.date_range(
@@ -100,6 +102,8 @@ def get_wx():
 		daily_data["apparent_temperature_max"] = daily_apparent_temperature_max
 		daily_data["apparent_temperature_min"] = daily_apparent_temperature_min
 		daily_data["precipitation_probability_max"] = daily_precipitation_probability_max
+		daily_data["wind_speed_10m_max"] = daily_wind_speed_10m_max
+		daily_data["wind_gusts_10m_max"] = daily_wind_gusts_10m_max
 
 		#process current data. 
 		current = response.Current()
@@ -153,6 +157,3 @@ def build_wx():
 	df_week = add_sun_check(df_week, "uv_index")
 	return df_current, df_week
 
-df_test1, df_test2 = build_wx()
-print(df_test2)
-print(df_test1['DAY'].unique())

@@ -8,6 +8,8 @@ from get_bible import get_verses                            #import function to 
 from pull_verse import get_display_verse                    
 from config import * 
 import pandas as pd
+from get_snow import merge_dfs, calc_snowstoke              #import functions to get snow data
+from pickle_calc import plot_pickle
 
 
 
@@ -55,6 +57,17 @@ def generate_daily_report():                                #generate a dict wit
     verse_html = "\n".join(f"{item}, " for item in verse_list)
     
     display_verse_html = get_display_verse(display_verse)
+
+    #################SNOW#############################
+    #call merge_dfs function to get dataframe with necessary data for the resorts
+    df_mergedsnow = merge_dfs()
+    #go through dataframe to calculate scores and extract more relevant data
+    df_snowscores = calc_snowstoke(df_mergedsnow)
+    print(df_snowscores)
+
+
+    ###########PICKLE###########
+    img_base64, pickle_scores = plot_pickle()
 
 
     ###################CONVERT TO HTML#################################
@@ -111,8 +124,15 @@ def generate_daily_report():                                #generate a dict wit
     {wx_week_html}
 
     <h3>Outdoor Activity Indices</h3>
-    <p>Pickleball Index[coming soon]<br>
-    Snowboard Index[coming soon]</p>
+    <p>Pickleball Index<br>
+    <img src="data:image/png;base64,{img_base64}">
+    Snowboard Index</p>
+    <p>Steven's Pass Ski Guidance: {df_snowscores['stoke_guide'][0]}<br>
+    Yesterday, it snowed {df_snowscores['snow_yest'][0]} inches<br>
+    Tomorrow, exected to rain {df_snowscores['rain_tom'][0]} inches and snow {df_snowscores['snow_tom'][0]} inches</p>
+    <p>White Pass Ski Guidance: {df_snowscores['stoke_guide'][1]}<br>
+    Yesterday, it snowed {df_snowscores['snow_yest'][1]} inches<br>
+    Tomorrow, exected to rain {df_snowscores['rain_tom'][1]} inches and snow {df_snowscores['snow_tom'][1]} inches</p>
 
     <h3>Useful Links</h3>
     <p>
