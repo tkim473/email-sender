@@ -1,0 +1,1 @@
+This project is just an automated daily email that I send to my family with topics that are relevant to us. It's mainly a way for me to practice doing some API calls utilizing python. I utilized a google sheet briefly as a way to "store" data. 
