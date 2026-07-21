@@ -98,7 +98,7 @@ def generate_daily_report():                                #generate a dict wit
     <!doctype html>
     <html lang="und" dir="auto" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
     <h3>Daily Report: {formatted_date}</h3>
-    <p> This awesome daily newsletter will provide you an automated weather forecast, current state gas prices, and bible verses. </p>
+    <p>This awesome daily newsletter will provide you an automated weather forecast, current state gas prices, and bible verses. </p>
 
     <h3>Weather Right Now</h3>
     {wx_now_html}
